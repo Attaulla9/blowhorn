@@ -6,23 +6,15 @@
         v-for="(movie, index) in movies.results"
         :key="index"
       >
-        <!-- {{movie}} -->
-        <div class="card m-3 shodow-lg">
-          <!-- <div v-if="movie.Poster == 'N/A'">
-            <img
-              class="card-img-top"
-              src="https://dummyimage.com/296x420/c9c9c9/fff.jpg&text=No+Image"
-              alt="Card image cap"
-            />
-          </div> -->
+        <div class=" m-3 shodow-lg">
           <div class="image-div">
             <img
               loading="lazy"
-              class="card-img rounded "
+              class="image_poster "
               :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
               alt="Card image cap"
             />
-            <p class="card-title movie-title">{{ movie.title }}</p>
+            <p class="movie-title">{{ movie.title }}</p>
           </div>
         </div>
       </div>
@@ -60,12 +52,16 @@ img {
 .image-div{
   position: relative;
 }
+.image_poster{
+  border-radius: 8px;
+}
 .image-div::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
+  border-radius: 8px;
   bottom: 0;
   background: linear-gradient(
     to bottom,
