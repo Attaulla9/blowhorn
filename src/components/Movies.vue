@@ -6,15 +6,18 @@
         v-for="(movie, index) in movies.results"
         :key="index"
       >
-        <div class=" m-3 shodow-lg">
+        <div class="m-3 shodow-lg">
           <div class="image-div">
             <img
               loading="lazy"
-              class="image_poster "
+              class="image_poster"
               :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
               alt="Card image cap"
             />
-            <p class="movie-title">{{ movie.title }}</p>
+            <div class="movie-title">
+              <p class="title mb-0">{{ movie.title }}</p>
+              <p class="year" >{{ movie.release_date }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -39,8 +42,10 @@ export default {
   methods: {
     pagination() {
       this.page++;
+      this.$store.dispatch("get_moviews", this.page);
     },
   },
+  
 };
 </script>
 
@@ -49,10 +54,10 @@ img {
   width: 100%;
   height: 50%;
 }
-.image-div{
+.image-div {
   position: relative;
 }
-.image_poster{
+.image_poster {
   border-radius: 8px;
 }
 .image-div::before {
@@ -65,18 +70,17 @@ img {
   bottom: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0) 50%,
-    rgba(0, 0, 0, 1) 100%
+    rgba(0, 0, 0, 0) 70%,
+    rgba(0, 0, 0, 2) 109%
   );
   z-index: 1;
 }
-.movie-title  {
-    position: absolute;
-    color: #fff;
-    bottom: 0;
-    left: 10px;
-    z-index: 2;
-    font-size: 16px;
-  }
-
+.movie-title {
+  position: absolute;
+  color: #fff;
+  bottom: 0;
+  left: 10px;
+  z-index: 2;
+  font-size: 16px;
+}
 </style>
