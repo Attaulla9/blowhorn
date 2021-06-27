@@ -6,20 +6,20 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        apikey: "16ee9d2",
+        apikey: "5c11c2232353c07fcfa4d3a0c7a8c58a",
         movies: ''
     },
     mutations: {
         GET_MOVIES(state, payload) {
             state.movies = payload
-        }
-
+        }       
     },
     actions: {
         get_moviews({ commit }) {
             axios
-                .get(`https://www.omdbapi.com/?apikey=${this.state.apikey}&s=No entry&typ=movie`)
+                .get(`https://api.themoviedb.org/3/discover/movie?api_key=${this.state.apikey}`)
                 .then((response) => {
+                    console.log(response.data)
                     commit('GET_MOVIES', response.data);
                 })
                 .catch((error) => {
