@@ -18,7 +18,7 @@ export default new Vuex.Store({
     actions: {
         get_moviews({ commit }) {
             axios
-                .get(`http://www.omdbapi.com/?apikey=${this.state.apikey}&s=No entry&typ=movie`)
+                .get(`https://www.omdbapi.com/?apikey=${this.state.apikey}&s=No entry&typ=movie`)
                 .then((response) => {
                     commit('GET_MOVIES', response.data);
                 })
