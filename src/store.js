@@ -13,11 +13,6 @@ export default new Vuex.Store({
         movies: (getters) => {
             return getters.movies_list
         },
-        filteredList(getters) {
-            return getters.movies_list.filter(post => {
-                return post.title.toLowerCase().includes(this.search.toLowerCase())
-            })
-        }
     },
     mutations: {
         GET_MOVIES(state, payload) {
