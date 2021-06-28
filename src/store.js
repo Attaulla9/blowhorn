@@ -13,13 +13,21 @@ export default new Vuex.Store({
         movies: (getters) => {
             return getters.movies_list
         },
+        filteredList(getters) {
+            return getters.movies_list.filter(post => {
+                return post.title.toLowerCase().includes(this.search.toLowerCase())
+            })
+        }
     },
     mutations: {
         GET_MOVIES(state, payload) {
             state.movies_list.push(...payload)
         },
         SORT_MOVIES(state, payload) {
-            state.movies_list=payload
+            state.movies_list = payload
+        },
+        SEARCHED_MOVIES(state,payload){
+            state.movies_list = payload
         }
     },
     actions: {
@@ -27,7 +35,7 @@ export default new Vuex.Store({
             axios
                 .get(`https://api.themoviedb.org/3/discover/movie?api_key=${this.state.apikey}&page=${payload}`)
                 .then((response) => {
-                    console.log(response.data.results)
+                    // console.log(response.data.results)
                     commit('GET_MOVIES', response.data.results);
                 })
                 .catch((error) => {
@@ -39,13 +47,24 @@ export default new Vuex.Store({
             axios
                 .get(`https://api.themoviedb.org/3/discover/movie?api_key=${this.state.apikey}&page=${payload}&sort_by=title.desc`)
                 .then((response) => {
-                    console.log(response.data.results)
+                    // console.log(response.data.results)
                     commit('SORT_MOVIES', response.data.results);
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         },
-        
+        searchMoview({ commit }, payload) {
+            axios
+                .get(`https://api.themoviedb.org/3/search/movie?api_key=${this.state.apikey}&query=${payload}`)
+                .then((response) => {
+                    console.log(response.data.results)
+                    commit('SEARCHED_MOVIES', response.data.results);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+
     }
 })

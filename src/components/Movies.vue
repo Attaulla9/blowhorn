@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-   
     <div class="row">
       <div
         class="col-lg-3 col-md-4 col-sm-6 col-md-3"
@@ -9,12 +8,23 @@
       >
         <div class="m-3 shodow-lg">
           <div class="image-div">
-            <img
-              loading="lazy"
-              class="image_poster"
-              :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
-              alt="Card image cap"
-            />
+            <div v-if="movie.poster_path == null">
+              <img
+                loading="lazy"
+                class="image_poster"
+                :src="`  https://dummyimage.com/228x396/000/ffffff&text=No+Image`"
+                alt="Card image cap"
+              />
+            </div>
+            <div v-else>
+              <img
+                loading="lazy"
+                class="image_poster"
+                :src="`https://image.tmdb.org/t/p/original/${movie.poster_path}`"
+                alt="Card image cap"
+              />
+            </div>
+
             <div class="movie-title">
               <p class="title mb-0">{{ movie.title }}</p>
               <p class="year">{{ movie.release_date }}</p>
