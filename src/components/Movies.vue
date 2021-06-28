@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+   
     <div class="row">
       <div
         class="col-lg-3 col-md-4 col-sm-6 col-md-3"
@@ -16,13 +17,12 @@
             />
             <div class="movie-title">
               <p class="title mb-0">{{ movie.title }}</p>
-              <p class="year" >{{ movie.release_date }}</p>
+              <p class="year">{{ movie.release_date }}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-   
   </div>
 </template>
 

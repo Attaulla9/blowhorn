@@ -16,6 +16,7 @@
         ><span class="h2 ml-2">Movies</span></a
       >
       <div class="form-inline">
+        
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"

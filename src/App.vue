@@ -1,6 +1,12 @@
 <template>
   <div id="app">
     <Navbar />
+     <div class="text-center w-50 m-auto">
+      <select class="form-control" @click="sorting">
+        <option value="" disabled selected>Sort</option>
+        <option value="desc">Alphabetically</option>
+      </select>
+    </div>
     <Movies :movies="movies" />
     <div class="d-flex justify-content-center my-2">
       <button class="btn btn-primary" @click="pagination">Load More</button>
@@ -26,6 +32,7 @@ export default {
     movies() {
       return this.$store.getters.movies;
     },
+   
   },
   mounted() {
     this.$store.dispatch("get_moviews", this.page);
@@ -33,6 +40,10 @@ export default {
   methods: {
     pagination() {
       this.$store.dispatch("get_moviews", this.page++);
+    },
+    sorting() {
+      this.$store.dispatch("sortbyTitle",);
+      return this.$store.getters.movies;
     },
   },
 };

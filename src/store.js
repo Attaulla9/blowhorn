@@ -10,13 +10,16 @@ export default new Vuex.Store({
         movies_list: [],
     },
     getters: {
-        movies: ( getters) => {
+        movies: (getters) => {
             return getters.movies_list
-        }
+        },
     },
     mutations: {
         GET_MOVIES(state, payload) {
             state.movies_list.push(...payload)
+        },
+        SORT_MOVIES(state, payload) {
+            state.movies_list=payload
         }
     },
     actions: {
@@ -31,5 +34,18 @@ export default new Vuex.Store({
                     console.log(error);
                 });
         },
+
+        sortbyTitle({ commit }, payload) {
+            axios
+                .get(`https://api.themoviedb.org/3/discover/movie?api_key=${this.state.apikey}&page=${payload}&sort_by=title.desc`)
+                .then((response) => {
+                    console.log(response.data.results)
+                    commit('SORT_MOVIES', response.data.results);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        
     }
 })
