@@ -3,7 +3,7 @@
     <div class="row">
       <div
         class="col-lg-3 col-md-4 col-sm-6 col-md-3"
-        v-for="(movie, index) in movies.results"
+        v-for="(movie, index) in movies"
         :key="index"
       >
         <div class="m-3 shodow-lg">
@@ -22,34 +22,17 @@
         </div>
       </div>
     </div>
-    <div class="d-flex justify-content-center">
-      <button class="btn btn-primary" @click="pagination">Load More</button>
-    </div>
+   
   </div>
 </template>
 
 <script>
 export default {
   props: ["movies"],
-  data() {
-    return {
-      page: 1,
-    };
-  },
-  mounted() {
-    this.$store.dispatch("get_moviews", this.page);
-  },
-  methods: {
-    pagination() {
-      this.page++;
-      this.$store.dispatch("get_moviews", this.page);
-    },
-  },
-  
 };
 </script>
 
-<style>
+<style  scoped>
 img {
   width: 100%;
   height: 50%;

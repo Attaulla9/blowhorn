@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <Navbar />
-    <Movies :movies="this.$store.state.movies" />
+    <Movies :movies="movies" />
+    <div class="d-flex justify-content-center my-2">
+      <button class="btn btn-primary" @click="pagination">Load More</button>
+    </div>
   </div>
 </template>
 
@@ -13,6 +16,24 @@ export default {
   components: {
     Movies,
     Navbar,
+  },
+  data() {
+    return {
+      page: 1,
+    };
+  },
+  computed: {
+    movies() {
+      return this.$store.getters.movies;
+    },
+  },
+  mounted() {
+    this.$store.dispatch("get_moviews", this.page);
+  },
+  methods: {
+    pagination() {
+      this.$store.dispatch("get_moviews", this.page++);
+    },
   },
 };
 </script>

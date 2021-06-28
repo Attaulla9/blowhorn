@@ -7,20 +7,25 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         apikey: "5c11c2232353c07fcfa4d3a0c7a8c58a",
-        movies: '',
+        movies_list: [],
+    },
+    getters: {
+        movies: ( getters) => {
+            return getters.movies_list
+        }
     },
     mutations: {
         GET_MOVIES(state, payload) {
-            state.movies = payload
-        }       
+            state.movies_list.push(...payload)
+        }
     },
     actions: {
-        get_moviews({ commit },payload) {
+        get_moviews({ commit }, payload) {
             axios
                 .get(`https://api.themoviedb.org/3/discover/movie?api_key=${this.state.apikey}&page=${payload}`)
                 .then((response) => {
-                    console.log(response.data)
-                    commit('GET_MOVIES', response.data);
+                    console.log(response.data.results)
+                    commit('GET_MOVIES', response.data.results);
                 })
                 .catch((error) => {
                     console.log(error);
